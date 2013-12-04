@@ -24,7 +24,7 @@
     </xsl:template>
 
     <xsl:template match="html:li">
-      <skos:Concept rdf:about="#{substring-before(normalize-space(html:a), ' ')}">
+      <skos:Concept rdf:about="#r{substring-before(normalize-space(html:a), ' ')}">
         <skos:notation><xsl:value-of select="substring-before(normalize-space(html:a), ' ')" /></skos:notation>
         <skos:prefLabel xml:lang="de"><xsl:value-of select="substring-after(normalize-space(html:a), ' ')" /></skos:prefLabel>
         <xsl:for-each select="html:ul[@class='opened']/html:li[@class='caption']">
