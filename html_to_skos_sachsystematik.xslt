@@ -12,7 +12,7 @@
     <xsl:output method="xml" />
 
     <xsl:template match="html:body">
-      <skos:ConceptScheme rdf:about="#">
+      <skos:ConceptScheme rdf:about="#scheme">
         <xsl:for-each select="html:div[@id='navigation']/html:ul/html:li[@id='sachsystematik']/html:ul[@id='ul_sachsystematik']/html:li[@id]">
           <skos:hasTopConcept>
             <xsl:apply-templates select="." />
@@ -24,6 +24,7 @@
     <xsl:template match="html:li">
       <skos:Concept rdf:about="#s{substring-before(normalize-space(html:a), ' ')}">
         <skos:notation><xsl:value-of select="substring-before(normalize-space(html:a), ' ')" /></skos:notation>
+        <skos:inScheme rdf:resource="#scheme" />
         <skos:prefLabel xml:lang="de"><xsl:value-of select="substring-after(normalize-space(html:a), ' ')" /></skos:prefLabel>
         <xsl:for-each select="html:ul[@class='opened']/html:li[@class='caption']">
           <skos:narrower>
